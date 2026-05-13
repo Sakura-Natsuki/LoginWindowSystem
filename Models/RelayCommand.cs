@@ -15,6 +15,7 @@ namespace LoginWindowSystem.Models
         //Predicate<object> 接受一个object参数、返回bool的方法
         private readonly Predicate<object> _canExecute;
 
+
         public RelayCommand(Action<object> execute,Predicate<object> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentException(nameof(execute));

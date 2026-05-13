@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace LoginWindowSystem.Models
+namespace LoginWindowSystem.Helpers
 {
     public class StringToVisibilityConverter : IValueConverter
     {

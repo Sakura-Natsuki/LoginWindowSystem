@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 
-namespace LoginWindowSystem.Models
+namespace LoginWindowSystem.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

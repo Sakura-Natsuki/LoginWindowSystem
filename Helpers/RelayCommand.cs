@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace LoginWindowSystem.Models
+namespace LoginWindowSystem.Helpers
 {
     public class RelayCommand : ICommand
     {
@@ -14,7 +14,6 @@ namespace LoginWindowSystem.Models
 
         //Predicate<object> 接受一个object参数、返回bool的方法
         private readonly Predicate<object> _canExecute;
-
 
         public RelayCommand(Action<object> execute,Predicate<object> canExecute = null)
         {

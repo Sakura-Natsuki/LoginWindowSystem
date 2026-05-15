@@ -1,9 +1,10 @@
 ﻿<Application x:Class="LoginWindowSystem.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:LoginWindowSystem"
-             StartupUri="MainWindow.xaml">
+             xmlns:helpers="clr-namespace:LoginWindowSystem.Helpers"
+             StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
-         
+        <helpers:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <helpers:InverseBoolConverter x:Key="InverseBoolConverter"/>
     </Application.Resources>
 </Application>

@@ -13,16 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LoginWindowSystem
+namespace LoginWindowSystem.Views
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(string nickname)
         {
             InitializeComponent();
+
+            DataContext = new ViewModels.MainViewModel(nickname);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LoginWindowSystem.ViewModels
@@ -75,7 +76,22 @@ namespace LoginWindowSystem.ViewModels
 
                 if (user != null)
                 {
+                    var mainWin = new Views.MainWindow(user.Nickname);
 
+                    mainWin.Show();
+
+                    foreach (Window w in Application.Current.Windows)
+                    {
+                        if (w is Views.LoginWindow)
+                        {
+                            w.Close();
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    ErrorMessage = "用户名或密码错误";
                 }
             }
             catch(Exception ex)

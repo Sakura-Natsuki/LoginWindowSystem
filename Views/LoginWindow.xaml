@@ -28,6 +28,7 @@
     
     <Border CornerRadius="6" Background="#0D1117"
             BorderBrush="#F7E018" BorderThickness="1.5">
+        
         <Grid Margin="30,25">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -45,9 +46,89 @@
 
             <TextBlock Grid.Row="0" Text="// 接口登录 //" Foreground="#F7E018"
                        FontSize="26" FontWeight="Bold" FontFamily="Consolas"
-                       HorizontalAlignment="Center" Margin="0,6,0,4">  
+                       HorizontalAlignment="Center" Margin="0,6,0,4">
+
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#f7e018" BlurRadius="12"
+                                      ShadowDepth="0" Opacity="0.7"/>
+                </TextBlock.Effect>
                 
             </TextBlock>
+
+            <TextBlock Grid.Row="1" Text="[输入身份凭证以接入系统]"
+                       Foreground="#00f0ff" FontSize="11" FontFamily="Consolas"
+                       HorizontalAlignment="Center" Opacity="0.7"/>
+
+            <TextBlock Grid.Row="2" Text="> 用户标识_" Foreground="#00f0ff"
+                       FontSize="13" FontFamily="Consolas" Margin="0,18,0,6" Grid.RowSpan="2"/>
+
+            <TextBox Grid.Row="3" 
+                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                     Background="#161b22" Foreground="#f7e018" CaretBrush="#00f0ff"
+                     BorderBrush="#30363D" FontFamily="Consolas" FontSize="15"
+                     Padding="18" Height="42" Margin="0,0,0,11"/>
+
+            <TextBlock Grid.Row="4" Text="> 访问密码_" Foreground="#00f0ff"
+                       FontSize="13" FontFamily="Consolas" Margin="0,18,0,6" Grid.RowSpan="2"/>
+
+            <PasswordBox x:Name="PwdBox" Grid.Row="5"
+                         Background="#161b22" Foreground="#f7e018" CaretBrush="#00f0ff"
+                         BorderBrush="#30363D" FontFamily="Consolas" FontSize="15"
+                         PasswordChanged="PwdBox_PasswordChanged"
+                         Padding="10,8" Height="42" 
+                         Margin="0,0,0,11"/>
+
+            <TextBlock Grid.Row="6" Text="{Binding ErrorMessage}" Foreground="#ff0040"
+                       FontSize="12" FontFamily="Conslas" HorizontalAlignment="Center"
+                       Visibility="{Binding ErrorMessage,
+                                    Converter={StaticResource StringToVisibilityConverter}}">
+
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#ff0040" BlurRadius="6" ShadowDepth="0"
+                                      Opacity="0.5"/>
+                </TextBlock.Effect>
+                
+            </TextBlock>
+
+            <Button Grid.Row="7" Content="[ 接入系统 ]" Command="{Binding LoginCommand}"
+                    Height="40" Margin="0,6,0,6" FontFamily="Consolas" FontSize="15"
+                    FontWeight="Bold" Foreground="#ff0040" Cursor="Hand">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="logInBorder" Background="#f7e018" CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="logInBorder" Property="Background"
+                                        Value="#ffd700"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="logInBorder" Property="Opacity"
+                                        Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+
+                <Button.Effect>
+                    <DropShadowEffect Color="#f7e018" BlurRadius="10" ShadowDepth="0" 
+                                      Opacity="0.4"/>
+                </Button.Effect>
+                
+                
+            </Button>
+
+            <TextBlock Grid.Row="8"
+                       Text="测试账号: admin / 123456"
+                       Foreground="#8b949e"
+                       FontSize="10" FontFamily="Consolas"
+                       HorizontalAlignment="Center" Margin="0,12,0,0" Opacity="0.4"/>
         </Grid>
+        
     </Border>
+    
 </Window>

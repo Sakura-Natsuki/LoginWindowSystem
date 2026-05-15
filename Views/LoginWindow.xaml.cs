@@ -22,6 +22,16 @@ namespace LoginWindowSystem.Views
         public LoginWindow()
         {
             InitializeComponent();
+
+            MouseLeftButtonDown += (s, e) => DragMove();
+        }
+
+        private void PwdBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ViewModels.LoginViewModel vm)
+            {
+                vm.Password = PwdBox.Password;
+            }
         }
     }
 }

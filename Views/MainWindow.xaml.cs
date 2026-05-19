@@ -26,5 +26,11 @@ namespace LoginWindowSystem.Views
 
             DataContext = new ViewModels.MainViewModel(nickname);
         }
+
+        private void TitleBar_Drag(object s, MouseButtonEventArgs e) => DragMove();
+
+        private void MinBtn_Click(object s, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+        private void CloseBtn_Click(object s, RoutedEventArgs e) => Close();
     }
 }

@@ -66,7 +66,7 @@
                      Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                      Background="#161b22" Foreground="#f7e018" CaretBrush="#00f0ff"
                      BorderBrush="#30363D" FontFamily="Consolas" FontSize="15"
-                     Padding="18" Height="42" Margin="0,0,0,11"/>
+                     Padding="10,8" Height="42" Margin="0,0,0,11"/>
 
             <TextBlock Grid.Row="4" Text="> 访问密码_" Foreground="#00f0ff"
                        FontSize="13" FontFamily="Consolas" Margin="0,18,0,6" Grid.RowSpan="2"/>

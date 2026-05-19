@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoginWindowSystem.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,18 @@ namespace LoginWindowSystem
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            try
+            {
+                new DatabaseService().InitDatabase();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"数据库初始化失败：{ex.Message}","WARNING",MessageBoxButton.OK,MessageBoxImage.Warning);
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace LoginWindowSystem.Services
     public class DatabaseService
     {
         private const string CONN_STR =
-            "Data Source=.;Initial Catalog=CyberpunkLoginDB;Integrated Security=Ture;";
+            "Data Source=.;Initial Catalog=CyberpunkLoginDB;Integrated Security=True;";
 
         public UserModel ValidateLogin(string username, string password)
         {

@@ -5,8 +5,279 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LoginWindowSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="CYBERPUNK 2077 // 主控面板" 
+        Height="550" Width="820"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent" ResizeMode="CanResizeWithGrip">
+
+    <Border CornerRadius="6" Background="#0d1117"
+            BorderBrush="#f7e018" BorderThickness="1.5">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="34"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="26"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="#161b22" MouseLeftButtonDown="TitleBar_Drag">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
+
+                    <TextBlock Text="◆" Foreground="#f7e018" FontSize="12"
+                               VerticalAlignment="Center" Margin="0,0,6,0"/>
+
+                    <TextBlock Text="神经接口 v2.0 // 主控面板" Foreground="#00f0ff"
+                               FontSize="11" FontFamily="Consolas" VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+
+                    <Button Content="_" Width="32" Height="26"
+                            Background="Transparent" Foreground="#8b949e"
+                            BorderThickness="0" FontFamily="Consolas"
+                            Click="MinBtn_Click"/>
+
+                    <Button Content="X" Width="32" Height="26"
+                            Background="Transparent" Foreground="#8b949e"
+                            BorderThickness="0" FontFamily="Consolas"
+                            Click="CloseBtn_Click"/>
+
+                </StackPanel>
+            </Grid>
+
+            <Border Grid.Row="1" Background="#F7E018" Opacity="0.3">
+                <Border.Effect>
+                    <DropShadowEffect Color="#F7E018" BlurRadius="3" ShadowDepth="0"/>
+                </Border.Effect>
+            </Border>
+
+            <Grid Grid.Row="2" Margin="18">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="#161b22" BorderBrush="#30363d"
+                        BorderThickness="1" CornerRadius="4" Padding="18">
+                    <StackPanel>
+                        <TextBlock Text="[ 用户档案 ]" Foreground="#f7e018"
+                                   FontSize="14" FontWeight="Bold" FontFamily="Consolas"
+                                   Margin="0,0,0,12"/>
+
+                        <Border Height="1" Background="#30363d" Margin="0,0,0,12"/>
+
+                        <TextBlock Text="{Binding WelcomeMessage}" Foreground="#00f0ff"
+                                   FontSize="15" FontFamily="Consolas" TextWrapping="Wrap"
+                                   Margin="0,0,0,10">
+
+                            <TextBlock.Effect>
+
+                                <DropShadowEffect Color="#00f0ff" BlurRadius="5"
+                                                  ShadowDepth="0" Opacity="0.4"/>
+                            </TextBlock.Effect>
+
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0.4">
+                            <TextBlock Text="> 系统时间: " Foreground="#8b949e"
+                                       FontSize="11" FontFamily="Consolas"/>
+
+                            <TextBlock Text="{Binding CurrentTime}" Foreground="#f7e018"
+                                       FontSize="11" FontFamily="Consolas"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10">
+                            <TextBlock Text="> 连接状态: " Foreground="#8e949e"
+                                       FontSize="11" FontFamily="Consolas"/>
+
+                            <TextBlock Text="在线 ●" Foreground="#00ff41"
+                                       FontSize="11" FontFamily="Consolas"/>
+                        </StackPanel>
+
+                        <Border Height="1" Background="#30363d" Margin="0,14"/>
+
+                        <Button Content="[ 刷新时间 ]" Command="{Binding RefreshCommand}"
+                                Height="30" Margin="0,4" FontFamily="Consolas"
+                                FontSize="11" Foreground="#0d1117" Cursor="Hand">
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+
+                                    <Border x:Name="RefreshButton" Background="#00f0ff" CornerRadius="2">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="RefreshButton" Property="Background"
+                                                    Value="#33f5ff"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+
+                        <Button Content="[ 断开连接 ]" Command="{Binding DisconnectCommand}"
+                                Height="30" Margin="0,4" FontFamily="Consolas"
+                                FontSize="11" Foreground="#0d1117" Cursor="Hand">
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+
+                                    <Border x:Name="DisconnectCommand" Background="#ff0040" CornerRadius="2">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="DisconnectCommand" Property="Background"
+                                                    Value="#ff0040"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Background="#161b22" BorderBrush="#30363d"
+                        BorderThickness="1" CornerRadius="4" Padding="18">
+
+                    <WrapPanel>
+                        
+                        <Border Background="#0d1117" BorderBrush="#30363d"
+                                BorderThickness="1" CornerRadius="3"
+                                Width="170" Height="100"
+                                Margin="0,0,10,10" Padding="12">
+
+                            <StackPanel>
+
+                                <TextBlock Text="系统负载" Foreground="#8b949e"
+                                           FontSize="11" FontFamily="Consolas"/>
+
+                                <TextBlock Text="23%" Foreground="#00ff41"
+                                           FontSize="28" FontWeight="Bold"
+                                           FontFamily="Consolas" Margin="0,6,0,0">
+
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="#00ff41" BlurRadius="4"
+                                                          ShadowDepth="0" Opacity="0.5"/>
+                                    </TextBlock.Effect>
+                                    
+                                </TextBlock>
+                                
+                            </StackPanel>
+                            
+                        </Border>
+                        
+                        <Border Background="#0d1117" BorderBrush="#30363d"
+                                BorderThickness="1" CornerRadius="3"
+                                Width="170" Height="100"
+                                Margin="0,0,10,10" Padding="12">
+
+                            <StackPanel>
+
+                                <TextBlock Text="内存使用" Foreground="#8b949e"
+                                           FontSize="11" FontFamily="Consolas"/>
+
+                                <TextBlock Text="4.2 GB" Foreground="#00F0FF"
+                                           FontSize="28" FontWeight="Bold"
+                                           FontFamily="Consolas" Margin="0,6,0,0">
+
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="#00F0FF" BlurRadius="4"
+                                                          ShadowDepth="0" Opacity="0.5"/>
+                                    </TextBlock.Effect>
+                                    
+                                </TextBlock>
+                                
+                            </StackPanel>
+                            
+                        </Border>
+                        
+                        <Border Background="#0d1117" BorderBrush="#30363d"
+                                BorderThickness="1" CornerRadius="3"
+                                Width="170" Height="100"
+                                Margin="0,0,10,10" Padding="12">
+
+                            <StackPanel>
+
+                                <TextBlock Text="网络延迟" Foreground="#8b949e"
+                                           FontSize="11" FontFamily="Consolas"/>
+
+                                <TextBlock Text="12ms" Foreground="#F7E018"
+                                           FontSize="28" FontWeight="Bold"
+                                           FontFamily="Consolas" Margin="0,6,0,0">
+
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="#F7E018" BlurRadius="4"
+                                                          ShadowDepth="0" Opacity="0.5"/>
+                                    </TextBlock.Effect>
+                                    
+                                </TextBlock>
+                                
+                            </StackPanel>
+                            
+                        </Border>
+                        
+                        <Border Background="#0d1117" BorderBrush="#30363d"
+                                BorderThickness="1" CornerRadius="3"
+                                Width="170" Height="100"
+                                Margin="0,0,10,10" Padding="12">
+
+                            <StackPanel>
+
+                                <TextBlock Text="活动进程" Foreground="#8b949e"
+                                           FontSize="11" FontFamily="Consolas"/>
+
+                                <TextBlock Text="187" Foreground="#FF007F"
+                                           FontSize="28" FontWeight="Bold"
+                                           FontFamily="Consolas" Margin="0,6,0,0">
+
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="#FF007F" BlurRadius="4"
+                                                          ShadowDepth="0" Opacity="0.5"/>
+                                    </TextBlock.Effect>
+                                    
+                                </TextBlock>
+                                
+                            </StackPanel>
+                            
+                        </Border>
+                        
+                    </WrapPanel>
+                    
+                </Border>
+
+            </Grid>
+
+            <Border Grid.Row="3" Background="#161b22" Padding="10,3">
+
+                <Grid>
+                    <TextBlock Text="系统就绪 // 所有模块正常运行"
+                               Foreground="#8B949E" FontSize="10" FontFamily="Consolas"/>
+
+                    <TextBlock Text="CYBERPUNK v2.0"
+                               Foreground="#F7E018" FontSize="10" FontFamily="Consolas"
+                               HorizontalAlignment="Right" Opacity="0.5"/>
+                </Grid>
+                
+            </Border>
+            
+        </Grid>
+    </Border>
 </Window>

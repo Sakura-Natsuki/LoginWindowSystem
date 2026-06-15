@@ -11,7 +11,7 @@
                         IsDesignTimeCreatable=True}"
         Title="CYBERPUNK 2077 // 身份验证" 
         Height="480" 
-        Width="401"
+        Width="400"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent"

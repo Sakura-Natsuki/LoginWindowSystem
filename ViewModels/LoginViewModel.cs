@@ -3,6 +3,7 @@ using LoginWindowSystem.Models;
 using LoginWindowSystem.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,9 @@ namespace LoginWindowSystem.ViewModels
 
         public LoginViewModel()
         {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+
             OpenRegisterCommand = new RelayCommand(_ => ExecuteOpenRegister());
 
             LoginCommand = new RelayCommand(async _ => await ExecuteLogin(), _ => CanLogin());

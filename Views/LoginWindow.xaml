@@ -8,10 +8,10 @@
         xmlns:local="clr-namespace:LoginWindowSystem.Views"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:LoginViewModel,
-                                         IsDesignTimeCreatable=True}"
+                        IsDesignTimeCreatable=True}"
         Title="CYBERPUNK 2077 // 身份验证" 
         Height="480" 
-        Width="400"
+        Width="401"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent"

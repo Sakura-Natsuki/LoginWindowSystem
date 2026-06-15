@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -14,7 +15,8 @@ namespace LoginWindowSystem.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private readonly DatabaseService _db = new DatabaseService();
+        private DatabaseService _db;
+        private DatabaseService Db => _db ?? (_db = new DatabaseService());
 
         private string _username;
 
@@ -55,7 +57,7 @@ namespace LoginWindowSystem.ViewModels
         public LoginViewModel()
         {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-                return;
+                return;  
 
             OpenRegisterCommand = new RelayCommand(_ => ExecuteOpenRegister());
 
@@ -80,7 +82,7 @@ namespace LoginWindowSystem.ViewModels
 
             try
             {
-                var user = await Task.Run(() => _db.ValidateLogin(Username,Password));
+                var user = await Task.Run(() => Db.ValidateLogin(Username,Password));
 
                 if (user != null)
                 {

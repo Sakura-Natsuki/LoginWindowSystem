@@ -32,8 +32,8 @@
         <Grid Margin="30,25">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                
+                <RowDefinition Height="auto"/> 
+
                 <RowDefinition Height="36"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="36"/>
@@ -41,6 +41,9 @@
                 
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="52"/>
+                <RowDefinition Height="auto"/>
+                
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
@@ -127,6 +130,46 @@
                        Foreground="#8b949e"
                        FontSize="10" FontFamily="Consolas"
                        HorizontalAlignment="Center" Margin="0,12,0,0" Opacity="0.4"/>
+
+            <Button Grid.Row="9" Content="[ 注册新账号 ]" FontSize="11" HorizontalAlignment="Center"
+                    FontFamily="Consolas" Margin="0,10,0,0" Command="{Binding OpenRegisterCommand}"
+                    Cursor="Hand" Foreground="#8b949e">
+                
+                <Button.Template>
+                    
+                    <ControlTemplate TargetType="Button">
+                        
+                        <TextBlock x:Name="linkText" Text="{TemplateBinding Content}"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="Consolas" FontSize="11" Background="Transparent">
+                            
+                            <TextBlock.Style>
+                                
+                                <Style TargetType="TextBlock">
+                                    
+                                    <Setter Property="Foreground" Value="#8b949e"/>
+                                    
+                                    <Style.Triggers>
+                                        
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            
+                                            <Setter Property="Foreground" Value="#00f0ff"/>
+                                            
+                                        </Trigger>
+                                        
+                                    </Style.Triggers>
+                                    
+                                </Style>
+                                
+                            </TextBlock.Style>
+                        </TextBlock>
+                        
+                    </ControlTemplate>
+                    
+                </Button.Template>
+                
+            </Button>
+
         </Grid>
         
     </Border>

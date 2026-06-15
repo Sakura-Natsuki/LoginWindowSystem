@@ -5,14 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
+using System.Configuration;
 using LoginWindowSystem.Models;
 
 namespace LoginWindowSystem.Services
 {
     public class DatabaseService
     {
-        private const string CONN_STR =
-            "Data Source=.;Initial Catalog=CyberpunkLoginDB;Integrated Security=True;";
+        private string CONN_STR = GetConnectionString();
+
+        private static string GetConnectionString()
+        {
+            var connStr = System.Configuration.ConfigurationManager.ConnectionStrings["CyberpunkDB"]?.ConnectionString;
+
+            if (string.IsNullOrEmpty(connStr))
+            {
+                throw new InvalidOperationException("未在 App.config 中找到连接字符串 CyberpunkDB");
+            }
+
+            return connStr;
+        }
 
         public UserModel ValidateLogin(string username, string password)
         {
@@ -43,7 +55,8 @@ namespace LoginWindowSystem.Services
                         if (r.Read())
                         {
                             //6.将数据库行映射为UserModel对象
-                            return new UserModel{
+                            return new UserModel
+                            {
                                 Id = (int)r["Id"],
                                 Username = (string)r["Username"],
                                 PasswordHash = (string)r["PasswordHash"],
@@ -83,6 +96,77 @@ INSERT INTO Users(Username,PasswordHash,Nickname) VALUES('admin',@hash,N'管理�
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public bool RegisterUser(string username, string password, string nickname)
+        {
+            string hash = Sha256(password);
+
+            using (var conn = new SqlConnection(CONN_STR))
+            {
+                conn.Open();
+
+                var checkSql = "Select Count(*) From Users Where Username = @u";
+
+                using (var checkCmd = new SqlCommand(checkSql, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@u",username);
+
+                    int count = (int)checkCmd.ExecuteScalar();
+
+                    if(count > 0)
+                    {
+                        return false;
+                    }
+                }
+
+                var insertSql = "INSERT INTO Users (Username, PasswordHash, Nickname) VALUES (@u, @p, @n)";
+
+                using (var insertCmd = new SqlCommand(insertSql, conn))
+                {
+                    insertCmd.Parameters.AddWithValue("@u",username);
+
+                    insertCmd.Parameters.AddWithValue("@p",hash);
+
+                    insertCmd.Parameters.AddWithValue("@n",nickname);
+
+                    int rows = insertCmd.ExecuteNonQuery();
+
+                    return rows > 0;
+                }
+            }
+        }
+
+        public List<UserModel> GetAllUser()
+        {
+            var users = new List<UserModel>();
+
+            using (var conn = new SqlConnection(CONN_STR))
+            {
+                conn.Open();
+
+                var sql = "select Id, Username, PasswordHash, Nickname, CreatedAt FROM Users order by CreatedAt DESC";
+
+                using (var cmd = new SqlCommand(sql,conn))
+                {
+                    using (var r = cmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            users.Add(new UserModel
+                            {
+                                Id = (int)r["Id"],
+                                Username = (string)r["Username"],
+                                Nickname = (string)r["Nickname"],
+                                CreatedAt = (DateTime)r["CreatedAt"],
+                                PasswordHash = (string)r["PasswordHash"]
+                            });
+                        }
+                    }
+                }
+            }
+
+            return users;
         }
 
         public static string Sha256(string raw)

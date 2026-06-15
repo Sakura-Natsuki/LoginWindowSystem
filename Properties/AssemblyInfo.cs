@@ -8,9 +8,9 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("LoginWindowSystem")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("1")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("1")]
 [assembly: AssemblyProduct("LoginWindowSystem")]
 [assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]

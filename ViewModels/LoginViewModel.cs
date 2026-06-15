@@ -49,8 +49,12 @@ namespace LoginWindowSystem.ViewModels
 
         public ICommand LoginCommand { get; }
 
+        public ICommand OpenRegisterCommand { get; }
+
         public LoginViewModel()
         {
+            OpenRegisterCommand = new RelayCommand(_ => ExecuteOpenRegister());
+
             LoginCommand = new RelayCommand(async _ => await ExecuteLogin(), _ => CanLogin());
         }
 
@@ -101,6 +105,22 @@ namespace LoginWindowSystem.ViewModels
             finally
             {
                 IsLogging = false;
+            }
+        }
+
+        private void ExecuteOpenRegister()
+        {
+            Services.LogService.Instacne.Info("User clicks the registration entry");
+
+            new Views.RegisterWindow().Show();
+
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is Views.LoginWindow)
+                {
+                    window.Close();
+                    break;
+                }
             }
         }
     }

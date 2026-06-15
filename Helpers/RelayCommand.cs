@@ -30,7 +30,7 @@ namespace LoginWindowSystem.Helpers
         //WPF调用此方法判断按钮是否可用
         public bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
 
-        //"关键技巧"：将CanExecuteChanged事件转发给WPF全局的RequerySuggest
+        //将CanExecuteChanged事件转发给WPF全局的RequerySuggest
         //WPF在焦点变化、键盘输入等时机自动重新查询所有命令的CanExecute
         public event EventHandler CanExecuteChanged
         {
